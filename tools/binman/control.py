@@ -6,6 +6,7 @@
 #
 
 from collections import OrderedDict
+from elftools.elf.elffile import ELFError
 import glob
 try:
     import importlib.resources

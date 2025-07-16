@@ -78,7 +78,7 @@ config TARGET_AM625_R5_EVC_7K_KB01_CB
 	select SPL_RAM
 	select K3_DDRSS
 	select BINMAN
-imply SYS_K3_SPL_ATF
+	imply SYS_K3_SPL_ATF
 
 endchoice
 

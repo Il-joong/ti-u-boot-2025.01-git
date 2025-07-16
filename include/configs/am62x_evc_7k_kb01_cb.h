@@ -36,4 +36,4 @@
 /* Now for the remaining common defines */
 #include <configs/ti_armv7_common.h>
 
-#endif /* __CONFIG_AM625_EVM_H */
+#endif /* __CONFIG_AM625_EVC_7K_KB01_CB_H */
