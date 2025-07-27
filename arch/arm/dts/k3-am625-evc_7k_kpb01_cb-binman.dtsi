@@ -5,7 +5,7 @@
 
 #include "k3-binman.dtsi"
 
-#ifdef CONFIG_TARGET_AM625_R5_EVC_7K_KB01_CB
+#ifdef CONFIG_TARGET_AM625_R5_EVC_7K_KPB01_CB
 
 &binman {
 	tiboot3-am62x-hs-evm.bin {
@@ -150,9 +150,9 @@
 
 #endif
 
-#ifdef CONFIG_TARGET_AM625_A53_EVC_7K_KB01_CB
+#ifdef CONFIG_TARGET_AM625_A53_EVC_7K_KPB01_CB
 
-#define SPL_AM625_SK_DTB "spl/dts/ti/k3-am625-evc_7k_kb01_cb.dts"
+#define SPL_AM625_SK_DTB "spl/dts/k3-am625-evc_7k_kpb01_cb.dtb"
 #define AM625_SK_DTB "u-boot.dtb"
 
 &binman {

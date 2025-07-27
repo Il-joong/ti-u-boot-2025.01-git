@@ -6,13 +6,13 @@
 if TARGET_AM625_A53_EVC_7K_KPB01_CB
 
 config SYS_BOARD
-       default "evc_7k_kb01_cb"
+       default "evc_7k_kpb01_cb"
 
 config SYS_VENDOR
        default "dongyang"
 
 config SYS_CONFIG_NAME
-       default "evc_7k_kb01_cb_evm"
+       default "am62x_evc_7k_kpb01_cb"
 
 source "board/dongyang/common/Kconfig"
 
@@ -20,11 +20,11 @@ endif
 
 if TARGET_AM625_R5_EVC_7K_KPB01_CB
 config SYS_BOARD
-       default "evc_7k_kb01_cb"
+       default "evc_7k_kpb01_cb"
 config SYS_VENDOR
        default "dongyang"
 config SYS_CONFIG_NAME
-       default "evc_7k_kb01_cb_evm"
+       default "am62x_evc_7k_kpb01_cb"
 config SPL_LDSCRIPT
        default "arch/arm/mach-omap2/u-boot-spl.lds"
 source "board/dongyang/common/Kconfig"

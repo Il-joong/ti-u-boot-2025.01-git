@@ -5,4 +5,4 @@
 # SPDX-License-Identifier:     GPL-2.0+
 #
 
-obj-y	+= evc_7k_kb01_cb.o
+obj-y	+= evc_7k_kpb01_cb.o

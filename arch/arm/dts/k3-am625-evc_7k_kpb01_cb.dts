@@ -12,8 +12,8 @@
 #include "k3-am625.dtsi" 
 
 / {
-	compatible = "dongyang,am625-evc_7k_kb01_cb", "dongyang,am625";
-	model = "dongyang AM625 evc_7k_kb_cb";
+	compatible = "dongyang,am625-evc_7k_kpb01_cb", "dongyang,am625";
+	model = "dongyang AM625 evc_7k_kpb01_cb";
 
 	aliases {
 		serial2 = &main_uart0;

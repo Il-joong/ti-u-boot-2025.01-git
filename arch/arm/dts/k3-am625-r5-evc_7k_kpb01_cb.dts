@@ -4,10 +4,10 @@
  * Copyright (C) 2021-2024 Texas Instruments Incorporated - https://www.ti.com/
  */
 
-#include "k3-am625-evc_7k_kb01_cb.dts"
+#include "k3-am625-evc_7k_kpb01_cb.dts"
 #include "k3-am62x-sk-ddr4-1600MTs.dtsi"
 #include "k3-am62-ddr.dtsi"
-#include "k3-am625-evc_7k_kb01_cb-u-boot.dtsi"
+#include "k3-am625-evc_7k_kpb01_cb-u-boot.dtsi"
 
 / {
 	aliases {
