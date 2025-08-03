@@ -14,7 +14,6 @@
 	aliases {
 		remoteproc0 = &sysctrler;
 		remoteproc1 = &a53_0;
-		serial0 = &wkup_uart0;
 		serial3 = &main_uart1;
 	};
 
