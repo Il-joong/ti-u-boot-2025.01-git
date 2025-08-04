@@ -275,6 +275,28 @@
 	pinctrl-0 = <&myuart0_debug_pins_default>;
 };
 
+&main_uart1 {
+	bootph-all;
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&myuart2_sci_pins_default>;
+};
+
+&main_uart2 {
+	bootph-all;
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&myuart2_sci_pins_default>;
+};
+
+&sdhci0 {
+	bootph-all;
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&emmc_pins_default>;
+	disable-wp;
+};
+
 &sdhci1 {
 	/* SD/MMC */
 	bootph-all;
@@ -423,4 +445,16 @@
 		reg = <0>;
 		ti,dp83822-rxctrl-strap-quirk; /* DP83822 RX_CTRL strap quirk */
 	};
+};
+
+&usb0 {
+	dr_mode = "host";
+	pinctrl-names = "default";
+	pinctrl-0 = <&myusb0_pins_default>;
+};
+
+&usb1 {
+	dr_mode = "host";
+	pinctrl-names = "default";
+	pinctrl-0 = <&myusb1_pins_default>;
 };
