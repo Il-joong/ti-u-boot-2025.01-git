@@ -10,39 +10,6 @@
 	chosen {
 		tick-timer = &main_timer0;
 	};
-    panel_rgb: panel-rgb {
-		compatible = "simple-panel";
-        status = "okay";
-    	width-mm = <154>;
-    	height-mm = <86>;
-    	panel-timing {
-        	clock-frequency = <33000000>;  // 33 MHz
-        	hactive = <800>;
-        	vactive = <480>;
-        	hback-porch = <46>;
-        	hfront-porch = <210>;
-        	hsync-len = <20>;               // 최소 HSD Pulse Width
-        	vback-porch = <23>;
-        	vfront-porch = <22>;
-        	vsync-len = <10>;               // 최소 VSD Pulse Width
-        	hsync-active = <0>;            // active low
-        	vsync-active = <0>;            // active low
-        	de-active = <1>;               // active high
-        	pixelclk-active = <1>;         // rising edge
-		};
-    };
-};
-
-&dss {
-    status = "okay";
-
-    pinctrl-names = "default";
-    pinctrl-0 = <&mydss1_pins_default>;
-
-    clocks = <&k3_clks 186 6>,
-             <&k3_clks 186 0>,
-             <&k3_clks 186 1>;
-    clock-names = "fck", "vp1", "vp2";
 };
 
 &main_timer0 {

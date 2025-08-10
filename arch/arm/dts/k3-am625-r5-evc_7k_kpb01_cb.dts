@@ -13,8 +13,14 @@
 	aliases {
 		remoteproc0 = &sysctrler;
 		remoteproc1 = &a53_0;
+		serial2 = &main_uart0;
 		serial3 = &main_uart1;
 	};
+
+    /* Ensure SPL selects the intended console explicitly */
+    chosen {
+        stdout-path = "serial2:115200n8";
+    };
 
 	a53_0: a53@0 {
 		compatible = "ti,am654-rproc";
@@ -69,6 +75,12 @@
 };
 
 
+/* Main UART0 is used for debug output */
+&main_uart0 {
+	bootph-all;
+	status = "okay";
+};
+
 /* Main UART1 is used for TIFS firmware logs */
 &main_uart1 {
 	status = "okay";
@@ -78,4 +90,34 @@
 &main_pktdma {
 	ti,sci = <&dm_tifs>;
 	bootph-all;
+};
+
+/* Ensure SPL retains pinctrl provider and UART pin states */
+&main_pmx0 {
+    bootph-all;
+};
+
+&myuart0_debug_pins_default {
+    bootph-all;
+};
+
+&myuart1_rs485_pins_default {
+    bootph-all;
+};
+
+/* Ensure SPL retains boot device pinmux */
+&emmc_pins_default {
+    bootph-all;
+};
+
+&sdcard_pins_default {
+    bootph-all;
+};
+
+&mygpio0_pins_default{
+	bootph-all;
+};
+
+&dss{
+	status = "disabled";
 };
