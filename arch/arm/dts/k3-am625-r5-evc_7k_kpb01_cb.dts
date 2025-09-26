@@ -13,7 +13,12 @@
 	aliases {
 		remoteproc0 = &sysctrler;
 		remoteproc1 = &a53_0;
+		serial2 = &main_uart0;
 		serial3 = &main_uart1;
+	};
+
+	chosen {
+		stdout-path = "serial2:115200n8";
 	};
 
 	a53_0: a53@0 {
@@ -68,6 +73,12 @@
 	};
 };
 
+
+/* Main UART0 for R5 SPL debug output */
+&main_uart0 {
+	bootph-all;
+	status = "okay";
+};
 
 /* Main UART1 is used for TIFS firmware logs */
 &main_uart1 {
