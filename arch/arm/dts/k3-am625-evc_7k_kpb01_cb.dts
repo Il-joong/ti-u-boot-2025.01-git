@@ -33,8 +33,8 @@
 
 	};
 
-	vmain_pd: regulator-0 {
-		/* TPS65988 PD CONTROLLER OUTPUT */
+	vcc_5v0_main : regulator-0 {
+		/* Output of TPS56208*/
 		bootph-all;
 		compatible = "regulator-fixed";
 		regulator-name = "vmain_pd";
@@ -44,26 +44,27 @@
 		regulator-boot-on;
 	};
 
-	vcc_5v0: regulator-1 {
-		/* Output of LM34936 */
+	vcc_3v3_main: regulator-1 {
+		/* Output of TPS56208 */
 		bootph-all;
 		compatible = "regulator-fixed";
-		regulator-name = "vcc_5v0";
-		regulator-min-microvolt = <5000000>;
-		regulator-max-microvolt = <5000000>;
-		vin-supply = <&vmain_pd>;
+		regulator-name = "vcc_3v3_main";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
 		regulator-always-on;
 		regulator-boot-on;
 	};
 
 	vcc_3v3_sys: regulator-2 {
-		/* output of LM61460-Q1 */
+		/* output of TPS22965 */
 		bootph-all;
 		compatible = "regulator-fixed";
 		regulator-name = "vcc_3v3_sys";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-		vin-supply = <&vmain_pd>;
+		vin-supply = <&vcc_3v3_main>;
+		enable-active-high;
+		gpio = <&tps65219_gpio 2 GPIO_ACTIVE_HIGH>;
 		regulator-always-on;
 		regulator-boot-on;
 	};
@@ -81,21 +82,7 @@
 		gpio = <&main_gpio0 0 GPIO_ACTIVE_HIGH>;
 	};
 
-	vdd_sd_dv: regulator-4 {
-		/* Output of TLV71033 */
-		bootph-all;
-		compatible = "regulator-gpio";
-		regulator-name = "tlv71033";
-		pinctrl-names = "default";
-		pinctrl-0 = <&vdd_sd_dv_pins_default>;
-		regulator-min-microvolt = <1800000>;
-		regulator-max-microvolt = <3300000>;
-		regulator-boot-on;
-		vin-supply = <&vcc_5v0>;
-		gpios = <&main_gpio0 31 GPIO_ACTIVE_HIGH>;
-		states = <1800000 0x0>,
-			 <3300000 0x1>;
-	};
+
 
 	vcc_1v8: regulator-5 {
 		/* output of TPS6282518DMQ */
@@ -123,6 +110,13 @@
 		bootph-all;
 		pinctrl-single,pins = <
 			AM62X_IOPAD(0x01d4, PIN_INPUT, 7) /* (B15) UART0_RTSn.GPIO1_23 */
+		>;
+	};
+
+	vdd_sd_dv_pins_default: vdd-sd-dv-default-pins {
+		bootph-all;
+		pinctrl-single,pins = <
+			AM62X_IOPAD(0x07c, PIN_OUTPUT, 7) /* (P25) GPMC0_CLK.GPIO0_31 */
 		>;
 	};
 
@@ -169,27 +163,36 @@
 	pinctrl-0 = <&main_i2c0_pins_default>;
 	clock-frequency = <400000>;
 
-	tps65219: pmic@30 {
-		bootph-all;
-		compatible = "ti,tps65219";
-		reg = <0x30>;
-		buck1-supply = <&vcc_3v3_main>;
-		buck2-supply = <&vcc_3v3_main>;
-		buck3-supply = <&vcc_3v3_main>;
-		ldo1-supply = <&vcc_3v3_main>;
-		ldo2-supply = <&buck2_reg>;
-		ldo3-supply = <&vcc_3v3_main>>;
-		ldo4-supply = <&vcc_3v3_main>>;
+		tps65219: pmic@30 {
+			bootph-all;
+			compatible = "ti,tps65219";
+			reg = <0x30>;
+			buck1-supply = <&vcc_3v3_main>;
+			buck2-supply = <&vcc_3v3_main>;
+			buck3-supply = <&vcc_3v3_main>;
+			ldo1-supply = <&vcc_3v3_main>;
+			ldo2-supply = <&buck2_reg>;
+			ldo3-supply = <&vcc_3v3_main>;
+			ldo4-supply = <&vcc_3v3_main>;
 
-		pinctrl-names = "default";
-		pinctrl-0 = <&pmic_irq_pins_default>;
-		interrupt-parent = <&gic500>;
-		interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;
-		interrupt-controller;
-		#interrupt-cells = <1>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&pmic_irq_pins_default &vdd_sd_dv_pins_default>;
+			interrupt-parent = <&gic500>;
+			interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;
+			interrupt-controller;
+			#interrupt-cells = <1>;
 
-		system-power-controller;
-		ti,power-button;
+			system-power-controller;
+			ti,power-button;
+
+			/* VSEL_SD pin control for LDO1 voltage selection */
+			vsel-sd-gpios = <&main_gpio0 31 GPIO_ACTIVE_HIGH>;
+
+			tps65219_gpio: gpio {
+				compatible = "ti,tps65219-gpio";
+				gpio-controller;
+				#gpio-cells = <2>;
+			};
 
 		regulators {
 			buck1_reg: buck1 {
@@ -218,12 +221,11 @@
 
 			ldo1_reg: ldo1 {
 				/*
-				 * Regulator is left as is unused, vdd_sd
-				 * is controlled via GPIO with bypass config
-				 * as per the NVM configuration
+				 * VDDSHV_SDIO controlled via VSEL_SD pin (GPIO0_31)
+				 * for 3.3V/1.8V switching
 				 */
-				regulator-name = "VDD_SD_3V3";
-				regulator-min-microvolt = <3300000>;
+				regulator-name = "VDDSHV_SDIO";
+				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <3300000>;
 				regulator-allow-bypass;
 				regulator-boot-on;
@@ -231,9 +233,9 @@
 			};
 
 			ldo2_reg: ldo2 {
-				regulator-name = "VDDA_0V85";
-				regulator-min-microvolt = <850000>;
-				regulator-max-microvolt = <850000>;
+				regulator-name = "VDDR_CORE2";
+				regulator-min-microvolt = <1800000>;
+				regulator-max-microvolt = <1800000>;
 				regulator-boot-on;
 				regulator-always-on;
 			};
