@@ -17,6 +17,10 @@
 		serial3 = &main_uart1;
 	};
 
+	chosen {
+		stdout-path = "serial2:115200n8";
+	};
+
 	a53_0: a53@0 {
 		compatible = "ti,am654-rproc";
 		reg = <0x00 0x00a90000 0x00 0x10>;
@@ -76,6 +80,12 @@
 
 /* Main UART0 is used for debug output */
 &main_uart0 {
+	status = "okay";
+};
+
+/* Main UART0 for R5 SPL debug output */
+&main_uart0 {
+	bootph-all;
 	status = "okay";
 };
 

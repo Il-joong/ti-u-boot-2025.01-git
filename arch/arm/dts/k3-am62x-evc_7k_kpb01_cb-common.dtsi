@@ -7,7 +7,10 @@
 
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/gpio/gpio.h>
+<<<<<<< HEAD
 #include <dt-bindings/net/ti-dp83867.h>
+=======
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 #include "k3-am625.dtsi"
 
 / {
@@ -20,7 +23,10 @@
 		mmc2 = &sdhci2;
 		spi0 = &ospi0;
 		ethernet0 = &cpsw_port1;
+<<<<<<< HEAD
 		ethernet1 = &cpsw_port2;
+=======
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 		usb0 = &usb0;
 		usb1 = &usb1;
 	};
@@ -129,6 +135,7 @@
 			default-state = "off";
 		};
 	};
+<<<<<<< HEAD
 
 	tlv320_mclk: clk-0 {
 		#clock-cells = <0>;
@@ -175,6 +182,8 @@
 			};
 		};
 	};
+=======
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
 
 &phy_gmii_sel {
@@ -201,6 +210,7 @@
 		>;
 	};
 
+<<<<<<< HEAD
 	main_i2c0_pins_default: main-i2c0-default-pins {
 		pinctrl-single,pins = <
 			AM62X_IOPAD(0x1e0, PIN_INPUT_PULLUP, 0) /* (B16/E12) I2C0_SCL */
@@ -223,6 +233,8 @@
 		>;
 	};
 
+=======
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 	main_mmc0_pins_default: main-mmc0-default-pins {
 		bootph-all;
 		pinctrl-single,pins = <
@@ -283,6 +295,15 @@
 		>;
 	};
 
+<<<<<<< HEAD
+=======
+	main_usb0_pins_default: main-usb0-pins-default {
+		pinctrl-single,pins = <
+			AM64X_IOPAD(0x029c, PIN_OUTPUT, 0) /* (C20) USB0_DRVVBUS */
+		>;
+	};
+
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 	main_usb1_pins_default: main-usb1-default-pins {
 		pinctrl-single,pins = <
 			AM62X_IOPAD(0x0258, PIN_OUTPUT | PIN_DS_PULLUD_ENABLE | PIN_DS_PULL_UP, 0) /* (F18/E16) USB1_DRVVBUS */
@@ -331,6 +352,7 @@
 		>;
 	};
 
+<<<<<<< HEAD
 	ospi0_pins_default: ospi0-default-pins {
 		bootph-all;
 		pinctrl-single,pins = <
@@ -367,11 +389,17 @@
 		>;
 	};
 };
+=======
+
+};
+
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 
 &cpsw_mac_syscon {
 	bootph-all;
 };
 
+<<<<<<< HEAD
 &wkup_uart0 {
 	/* WKUP UART0 is used by DM firmware */
 	bootph-pre-ram;
@@ -379,6 +407,8 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&wkup_uart0_pins_default>;
 };
+=======
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 
 &main_uart0 {
 	bootph-all;
@@ -398,6 +428,7 @@
 	pinctrl-0 = <&main_uart1_pins_default>;
 };
 
+<<<<<<< HEAD
 &main_i2c0 {
 	status = "okay";
 	pinctrl-names = "default";
@@ -483,6 +514,15 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_i2c2_pins_default>;
 	clock-frequency = <400000>;
+=======
+&main_i2c1 {
+	status = "disabled";
+};
+
+
+&main_i2c2 {
+	status = "disabled";
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
 
 &sdhci0 {
@@ -514,6 +554,13 @@
 	phy-handle = <&cpsw3g_phy0>;
 };
 
+<<<<<<< HEAD
+=======
+&cpsw_port2 {
+    status = "disabled";
+};
+
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 &cpsw3g_mdio {
 	bootph-all;
 	status = "okay";
@@ -523,9 +570,13 @@
 	cpsw3g_phy0: ethernet-phy@0 {
 		bootph-all;
 		reg = <0>;
+<<<<<<< HEAD
 		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
 		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
 		ti,min-output-impedance;
+=======
+		/* DP83822 doesn't support advanced delay settings */
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 	};
 };
 
@@ -570,6 +621,7 @@
 };
 
 &usb0 {
+<<<<<<< HEAD
 	bootph-all;
 	usb-role-switch;
 
@@ -578,6 +630,11 @@
 		    remote-endpoint = <&usb_con_hs>;
 	       };
 	};
+=======
+	dr_mode = "host";
+	pinctrl-names = "default";
+	pinctrl-0 = <&main_usb0_pins_default>;
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
 
 &usb1 {
@@ -615,6 +672,7 @@
 	pinctrl-0 = <&main_dss0_pins_default>;
 };
 
+<<<<<<< HEAD
 &dss_ports {
 	/* VP2: DPI Output */
 	hdmi0_dss: port@1 {
@@ -625,6 +683,8 @@
 		};
 	};
 };
+=======
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 
 /* mcu_gpio0 and mcu_gpio_intr are reserved for mcu firmware usage */
 &mcu_gpio0 {
@@ -636,6 +696,7 @@
 };
 
 &ospi0 {
+<<<<<<< HEAD
 	bootph-all;
 	status = "okay";
 	pinctrl-names = "default";
@@ -646,4 +707,11 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pruss_uart_pins>;
 	status = "okay";
+=======
+	status = "disabled";
+};
+
+&pruss_uart {
+	status = "disabled";
+>>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
