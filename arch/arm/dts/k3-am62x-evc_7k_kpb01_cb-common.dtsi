@@ -7,10 +7,6 @@
 
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/gpio/gpio.h>
-<<<<<<< HEAD
-#include <dt-bindings/net/ti-dp83867.h>
-=======
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 #include "k3-am625.dtsi"
 
 / {
@@ -23,10 +19,6 @@
 		mmc2 = &sdhci2;
 		spi0 = &ospi0;
 		ethernet0 = &cpsw_port1;
-<<<<<<< HEAD
-		ethernet1 = &cpsw_port2;
-=======
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 		usb0 = &usb0;
 		usb1 = &usb1;
 	};
@@ -135,55 +127,6 @@
 			default-state = "off";
 		};
 	};
-<<<<<<< HEAD
-
-	tlv320_mclk: clk-0 {
-		#clock-cells = <0>;
-		compatible = "fixed-clock";
-		clock-frequency = <12288000>;
-	};
-
-	codec_audio: sound {
-		compatible = "simple-audio-card";
-		simple-audio-card,name = "AM62x-SKEVM";
-		simple-audio-card,widgets =
-			"Headphone",	"Headphone Jack",
-			"Line",		"Line In",
-			"Microphone",	"Microphone Jack";
-		simple-audio-card,routing =
-			"Headphone Jack",	"HPLOUT",
-			"Headphone Jack",	"HPROUT",
-			"LINE1L",		"Line In",
-			"LINE1R",		"Line In",
-			"MIC3R",		"Microphone Jack",
-			"Microphone Jack",	"Mic Bias";
-		simple-audio-card,format = "dsp_b";
-		simple-audio-card,bitclock-master = <&sound_master>;
-		simple-audio-card,frame-master = <&sound_master>;
-		simple-audio-card,bitclock-inversion;
-
-		simple-audio-card,cpu {
-			sound-dai = <&mcasp1>;
-		};
-
-		sound_master: simple-audio-card,codec {
-			sound-dai = <&tlv320aic3106>;
-			clocks = <&tlv320_mclk>;
-		};
-	};
-
-	hdmi0: connector-hdmi {
-		compatible = "hdmi-connector";
-		label = "hdmi";
-		type = "a";
-		port {
-			hdmi_connector_in: endpoint {
-				remote-endpoint = <&sii9022_out>;
-			};
-		};
-	};
-=======
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
 
 &phy_gmii_sel {
@@ -203,38 +146,12 @@
 	main_uart1_pins_default: main-uart1-default-pins {
 		bootph-pre-ram;
 		pinctrl-single,pins = <
-			AM62X_IOPAD(0x194, PIN_INPUT, 2) /* (B19/B18) MCASP0_AXR3.UART1_CTSn */
 			AM62X_IOPAD(0x198, PIN_OUTPUT, 2) /* (A19/B17) MCASP0_AXR2.UART1_RTSn */
 			AM62X_IOPAD(0x1ac, PIN_INPUT, 2) /* (E19/D15) MCASP0_AFSR.UART1_RXD */
 			AM62X_IOPAD(0x1b0, PIN_OUTPUT, 2) /* (A20/D16) MCASP0_ACLKR.UART1_TXD */
 		>;
 	};
 
-<<<<<<< HEAD
-	main_i2c0_pins_default: main-i2c0-default-pins {
-		pinctrl-single,pins = <
-			AM62X_IOPAD(0x1e0, PIN_INPUT_PULLUP, 0) /* (B16/E12) I2C0_SCL */
-			AM62X_IOPAD(0x1e4, PIN_INPUT_PULLUP, 0) /* (A16/D14) I2C0_SDA */
-		>;
-	};
-
-	main_i2c1_pins_default: main-i2c1-default-pins {
-		bootph-all;
-		pinctrl-single,pins = <
-			AM62X_IOPAD(0x1e8, PIN_INPUT_PULLUP, 0) /* (B17/A17) I2C1_SCL */
-			AM62X_IOPAD(0x1ec, PIN_INPUT_PULLUP, 0) /* (A17/A16) I2C1_SDA */
-		>;
-	};
-
-	main_i2c2_pins_default: main-i2c2-default-pins {
-		pinctrl-single,pins = <
-			AM62X_IOPAD(0x0b0, PIN_INPUT_PULLUP, 1) /* (K22/H18) GPMC0_CSn2.I2C2_SCL */
-			AM62X_IOPAD(0x0b4, PIN_INPUT_PULLUP, 1) /* (K24/H19) GPMC0_CSn3.I2C2_SDA */
-		>;
-	};
-
-=======
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 	main_mmc0_pins_default: main-mmc0-default-pins {
 		bootph-all;
 		pinctrl-single,pins = <
@@ -295,15 +212,12 @@
 		>;
 	};
 
-<<<<<<< HEAD
-=======
 	main_usb0_pins_default: main-usb0-pins-default {
 		pinctrl-single,pins = <
 			AM64X_IOPAD(0x029c, PIN_OUTPUT, 0) /* (C20) USB0_DRVVBUS */
 		>;
 	};
 
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 	main_usb1_pins_default: main-usb1-default-pins {
 		pinctrl-single,pins = <
 			AM62X_IOPAD(0x0258, PIN_OUTPUT | PIN_DS_PULLUD_ENABLE | PIN_DS_PULL_UP, 0) /* (F18/E16) USB1_DRVVBUS */
@@ -352,63 +266,14 @@
 		>;
 	};
 
-<<<<<<< HEAD
-	ospi0_pins_default: ospi0-default-pins {
-		bootph-all;
-		pinctrl-single,pins = <
-			AM62X_IOPAD(0x000, PIN_OUTPUT, 0) /* (H24/G19) OSPI0_CLK */
-			AM62X_IOPAD(0x02c, PIN_OUTPUT, 0) /* (F23/F19) OSPI0_CSn0 */
-			AM62X_IOPAD(0x00c, PIN_INPUT, 0) /* (E25/F18) OSPI0_D0 */
-			AM62X_IOPAD(0x010, PIN_INPUT, 0) /* (G24/G17) OSPI0_D1 */
-			AM62X_IOPAD(0x014, PIN_INPUT, 0) /* (F25/F21) OSPI0_D2 */
-			AM62X_IOPAD(0x018, PIN_INPUT, 0) /* (F24/F20) OSPI0_D3 */
-			AM62X_IOPAD(0x01c, PIN_INPUT, 0) /* (J23/G21) OSPI0_D4 */
-			AM62X_IOPAD(0x020, PIN_INPUT, 0) /* (J25/H21) OSPI0_D5 */
-			AM62X_IOPAD(0x024, PIN_INPUT, 0) /* (H25/G20) OSPI0_D6 */
-			AM62X_IOPAD(0x028, PIN_INPUT, 0) /* (J22/J21) OSPI0_D7 */
-			AM62X_IOPAD(0x008, PIN_INPUT, 0) /* (J24/H20) OSPI0_DQS */
-		>;
-	};
-
-	pruss_uart_pins: pruss-uart-pins {
-		pinctrl-single,pins = <
-			AM62X_IOPAD(0x01d8, PIN_INPUT, 6) /* (C15) MCAN0_TX.PR0_UART0_RXD */
-			AM62X_IOPAD(0x01dc, PIN_OUTPUT, 6) /* (E15) MCAN0_RX.PR0_UART0_TXD */
-		>;
-	};
-};
-
-&mcu_pmx0 {
-	wkup_uart0_pins_default: wkup-uart0-default-pins {
-		bootph-pre-ram;
-		pinctrl-single,pins = <
-			AM62X_MCU_IOPAD(0x02c, PIN_INPUT, 0) /* (C6/A7) WKUP_UART0_CTSn */
-			AM62X_MCU_IOPAD(0x030, PIN_OUTPUT, 0) /* (A4/B4) WKUP_UART0_RTSn */
-			AM62X_MCU_IOPAD(0x024, PIN_INPUT, 0) /* (B4/B5) WKUP_UART0_RXD */
-			AM62X_MCU_IOPAD(0x028, PIN_OUTPUT, 0) /* (C5/C6) WKUP_UART0_TXD */
-		>;
-	};
-};
-=======
 
 };
 
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 
 &cpsw_mac_syscon {
 	bootph-all;
 };
 
-<<<<<<< HEAD
-&wkup_uart0 {
-	/* WKUP UART0 is used by DM firmware */
-	bootph-pre-ram;
-	status = "reserved";
-	pinctrl-names = "default";
-	pinctrl-0 = <&wkup_uart0_pins_default>;
-};
-=======
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 
 &main_uart0 {
 	bootph-all;
@@ -428,93 +293,6 @@
 	pinctrl-0 = <&main_uart1_pins_default>;
 };
 
-<<<<<<< HEAD
-&main_i2c0 {
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&main_i2c0_pins_default>;
-	clock-frequency = <400000>;
-
-	eeprom@51 {
-		/* AT24C512C-MAHM-T or M24512-DFMC6TG */
-		compatible = "atmel,24c512";
-		reg = <0x51>;
-	};
-
-	typec_pd0: tps6598x@3f {
-		compatible = "ti,tps6598x";
-		reg = <0x3f>;
-
-		connector {
-			compatible = "usb-c-connector";
-			label = "USB-C";
-			self-powered;
-			data-role = "dual";
-			power-role = "sink";
-			port {
-				usb_con_hs: endpoint {
-					remote-endpoint = <&usb0_hs_ep>;
-				};
-			};
-		};
-	};
-};
-
-&main_i2c1 {
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&main_i2c1_pins_default>;
-	clock-frequency = <100000>;
-
-	tlv320aic3106: audio-codec@1b {
-		#sound-dai-cells = <0>;
-		compatible = "ti,tlv320aic3106";
-		reg = <0x1b>;
-		ai3x-micbias-vg = <1>;	/* 2.0V */
-
-		/* Regulators */
-		AVDD-supply = <&vcc_3v3_sys>;
-		IOVDD-supply = <&vcc_3v3_sys>;
-		DRVDD-supply = <&vcc_3v3_sys>;
-	};
-
-	sii9022: bridge-hdmi@3b {
-		compatible = "sil,sii9022";
-		reg = <0x3b>;
-		interrupt-parent = <&exp1>;
-		interrupts = <16 IRQ_TYPE_EDGE_FALLING>;
-		#sound-dai-cells = <0>;
-		sil,i2s-data-lanes = < 0 >;
-
-		ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			port@0 {
-				reg = <0>;
-
-				sii9022_in: endpoint {
-					remote-endpoint = <&dpi1_out>;
-				};
-			};
-
-			port@1 {
-				reg = <1>;
-
-				sii9022_out: endpoint {
-					remote-endpoint = <&hdmi_connector_in>;
-				};
-			};
-		};
-	};
-};
-
-&main_i2c2 {
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&main_i2c2_pins_default>;
-	clock-frequency = <400000>;
-=======
 &main_i2c1 {
 	status = "disabled";
 };
@@ -522,7 +300,6 @@
 
 &main_i2c2 {
 	status = "disabled";
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
 
 &sdhci0 {
@@ -531,6 +308,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_mmc0_pins_default>;
 	disable-wp;
+	/* EMMC - no power supply needed */
 };
 
 &sdhci1 {
@@ -540,6 +318,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_mmc1_pins_default>;
 	disable-wp;
+	/* Power supply will be set by board-specific DTS */
 };
 
 &cpsw3g {
@@ -554,13 +333,10 @@
 	phy-handle = <&cpsw3g_phy0>;
 };
 
-<<<<<<< HEAD
-=======
 &cpsw_port2 {
     status = "disabled";
 };
 
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 &cpsw3g_mdio {
 	bootph-all;
 	status = "okay";
@@ -570,13 +346,7 @@
 	cpsw3g_phy0: ethernet-phy@0 {
 		bootph-all;
 		reg = <0>;
-<<<<<<< HEAD
-		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
-		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
-		ti,min-output-impedance;
-=======
 		/* DP83822 doesn't support advanced delay settings */
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 	};
 };
 
@@ -621,20 +391,9 @@
 };
 
 &usb0 {
-<<<<<<< HEAD
-	bootph-all;
-	usb-role-switch;
-
-	port {
-		usb0_hs_ep: endpoint {
-		    remote-endpoint = <&usb_con_hs>;
-	       };
-	};
-=======
 	dr_mode = "host";
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_usb0_pins_default>;
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };
 
 &usb1 {
@@ -672,19 +431,6 @@
 	pinctrl-0 = <&main_dss0_pins_default>;
 };
 
-<<<<<<< HEAD
-&dss_ports {
-	/* VP2: DPI Output */
-	hdmi0_dss: port@1 {
-		reg = <1>;
-
-		dpi1_out: endpoint {
-			remote-endpoint = <&sii9022_in>;
-		};
-	};
-};
-=======
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 
 /* mcu_gpio0 and mcu_gpio_intr are reserved for mcu firmware usage */
 &mcu_gpio0 {
@@ -696,22 +442,9 @@
 };
 
 &ospi0 {
-<<<<<<< HEAD
-	bootph-all;
-	status = "okay";
-	pinctrl-names = "default";
-	pinctrl-0 = <&ospi0_pins_default>;
-};
-
-&pruss_uart {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pruss_uart_pins>;
-	status = "okay";
-=======
 	status = "disabled";
 };
 
 &pruss_uart {
 	status = "disabled";
->>>>>>> 7452339094dc4bffc46db6c11bce444bfd29a7d8
 };

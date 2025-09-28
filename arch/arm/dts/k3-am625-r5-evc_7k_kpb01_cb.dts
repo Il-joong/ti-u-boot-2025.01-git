@@ -104,3 +104,10 @@
 	bootph-all;
 };
 
+/* Enable GPIO0 for MMC1 power control in R5 SPL */
+&main_gpio0 {
+	bootph-all;
+	pinctrl-names = "default";
+	pinctrl-0 = <&mygpio0_pins_default>;
+};
+
