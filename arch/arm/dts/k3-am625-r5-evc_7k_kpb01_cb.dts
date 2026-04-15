@@ -5,7 +5,8 @@
  */
 
 #include "k3-am625-evc_7k_kpb01_cb.dts"
-#include "k3-am62x-sk-ddr4-1600MTs.dtsi"
+//#include "k3-am62x-sk-ddr4-1600MTs.dtsi"
+#include "k3-am62x-evc_7k_kpb01_cb-ddr4-1354MTs.dtsi"
 #include "k3-am62-ddr.dtsi"
 #include "k3-am625-evc_7k_kpb01_cb-u-boot.dtsi"
 
